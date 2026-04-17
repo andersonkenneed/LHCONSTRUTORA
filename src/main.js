@@ -1,9 +1,6 @@
 import './style.css'
 
-// Ativa as animações no CSS apenas se o JS carregar
-document.documentElement.classList.add('js-enabled');
-
-// Lógica de sincronização do vídeo com suavização
+// Sincronização do vídeo com scroll suave (Lerp)
 function initVideoScroll() {
   const heroSection = document.querySelector('.hero');
   const video = document.querySelector('#construction-video');
@@ -16,7 +13,6 @@ function initVideoScroll() {
   function updateVideo() {
     if (video.readyState >= 2) {
       currentTime += (targetTime - currentTime) * accel;
-      // Evita atualização se a diferença for imperceptível
       if (Math.abs(targetTime - currentTime) > 0.001) {
         video.currentTime = currentTime;
       }
@@ -36,9 +32,8 @@ function initVideoScroll() {
   requestAnimationFrame(updateVideo);
 }
 
-// Navbar e Animações de Interseção
+// Navbar e Animações
 function initUI() {
-  // Navbar
   const nav = document.querySelector('nav');
   if (nav) {
     window.addEventListener('scroll', () => {
@@ -52,12 +47,6 @@ function initUI() {
     }, { passive: true });
   }
 
-  // Intersection Observer
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -5% 0px'
-  };
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -65,12 +54,16 @@ function initUI() {
         observer.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
 
-  document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => observer.observe(el));
+  // Só esconde os elementos para animar se o JS estiver ativo aqui
+  document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => {
+    el.classList.add('ready'); // Agora sim o elemento fica invisível para animar
+    observer.observe(el);
+  });
 }
 
-// Formulário WhatsApp
+// Formulário
 function initForm() {
   const form = document.getElementById('whatsapp-form');
   if (!form) return;
@@ -85,15 +78,7 @@ function initForm() {
   });
 }
 
-// Iniciar quando o DOM estiver pronto
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initVideoScroll();
-    initUI();
-    initForm();
-  });
-} else {
-  initVideoScroll();
-  initUI();
-  initForm();
-}
+// Execução imediata
+initVideoScroll();
+initUI();
+initForm();
