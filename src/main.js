@@ -15,14 +15,22 @@ function initVideoScroll() {
   // Forçar autoplay dinâmico inicial para baixar logo o frame
   video.play().then(() => video.pause()).catch(() => {});
 
+  // Detecta se é mobile pelo User Agent ou tamanho de tela
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
   let targetTime = 0;
   let currentTime = 0;
-  const accel = 0.08; // Deixando mais suave para evitar lag nos celulares
+  
+  // No Desktop usamos um valor maior para resposta mais rápida, 
+  // No mobile usamos um valor ajustado especificamente para curar o "delay" da tela ao arrastar
+  const accel = isMobile ? 0.18 : 0.12; 
 
   // Função para atualizar o frame do vídeo
   function updateVideo() {
     if (video.readyState >= 2 && !isNaN(targetTime)) {
       currentTime += (targetTime - currentTime) * accel;
+      
+      // No mobile compensamos travamentos se o tempo atual já estourar quase na frente
       if (Math.abs(targetTime - currentTime) > 0.001) {
         try {
           video.currentTime = currentTime;
