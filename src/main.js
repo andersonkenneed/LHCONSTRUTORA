@@ -1,72 +1,107 @@
 import './style.css'
 
-// Ativa o estado de animação apenas se o JS carregar
-document.body.classList.add('js-active');
-
-// Sincronia de Vídeo Simples (Versão PC Aprovada)
+// Controle do Vídeo com Sincronia de Scroll (Smooth & Mobile Friendly)
 function initVideoScroll() {
+  const heroSection = document.querySelector('.hero');
   const video = document.querySelector('#construction-video');
-  const hero = document.querySelector('.hero');
-  if (!video || !hero) return;
+  if (!heroSection || !video) return;
 
-  video.pause();
+  let targetTime = 0;
+  let currentTime = 0;
+  const accel = 0.12;
 
-  const updateTime = () => {
-    const scrollY = window.scrollY;
-    const progress = Math.max(0, Math.min(scrollY / hero.offsetHeight, 1));
-    
-    if (video.duration) {
-      video.currentTime = video.duration * progress;
+  // Função para atualizar o frame do vídeo
+  function updateVideo() {
+    if (video.readyState >= 2) {
+      currentTime += (targetTime - currentTime) * accel;
+      if (Math.abs(targetTime - currentTime) > 0.001) {
+        video.currentTime = currentTime;
+      }
     }
-  };
+    requestAnimationFrame(updateVideo);
+  }
 
-  window.addEventListener('scroll', updateTime, { passive: true });
-  
-  // Mobile Unlock
-  const unlock = () => {
+  // Listener de Scroll
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const height = heroSection.offsetHeight;
+    if (scrollY <= height) {
+      const progress = scrollY / height;
+      targetTime = progress * video.duration;
+    }
+  }, { passive: true });
+
+  // "Destrava" o vídeo no mobile ao primeiro toque ou clique
+  const unlockVideo = () => {
     video.play().then(() => {
       video.pause();
-      updateTime();
-    }).catch(() => {});
-    window.removeEventListener('touchstart', unlock);
-    window.removeEventListener('click', unlock);
+      window.removeEventListener('touchstart', unlockVideo);
+      window.removeEventListener('mousedown', unlockVideo);
+    }).catch(e => console.log("Aguardando interação..."));
   };
-  window.addEventListener('touchstart', unlock);
-  window.addEventListener('click', unlock);
+  window.addEventListener('touchstart', unlockVideo, { passive: true });
+  window.addEventListener('mousedown', unlockVideo, { passive: true });
+
+  requestAnimationFrame(updateVideo);
 }
 
-// Animações de Interseção
-function initAnimations() {
+// Navbar e Animações de Elementos
+function initUI() {
+  // Navbar dinâmico
+  const nav = document.querySelector('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
+        nav.classList.remove('bg-surface/60');
+      } else {
+        nav.classList.remove('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
+        nav.classList.add('bg-surface/60');
+      }
+    }, { passive: true });
+  }
+
+  // Animações de Interseção
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
 
+  // Seleciona e ativa a animação nos elementos
   document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => {
+    el.classList.add('ready'); // Só agora o CSS aplica o estado de animação
     observer.observe(el);
   });
 }
 
-// Formulário
+// Formulário WhatsApp
 function initForm() {
   const form = document.getElementById('whatsapp-form');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('form-name').value;
-      const location = document.getElementById('form-location').value;
-      const service = document.getElementById('form-service').value;
-      const details = document.getElementById('form-details').value;
-      const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
-      window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
-    });
-  }
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('form-name').value;
+    const location = document.getElementById('form-location').value;
+    const service = document.getElementById('form-service').value;
+    const details = document.getElementById('form-details').value;
+    const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
+    window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
+  });
 }
 
-// Inicializa
-initVideoScroll();
-initAnimations();
-initForm();
+// Inicialização segura
+const start = () => {
+  initVideoScroll();
+  initUI();
+  initForm();
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', start);
+} else {
+  start();
+}
