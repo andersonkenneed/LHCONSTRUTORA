@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>LH CONSTRUTORA | Engenharia Civil de Excelência</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script type="module" src="/src/main.js"></script>
+</head>
+<body class="bg-background text-on-background font-body smooth-scroll">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-md transition-all duration-500 border-b border-white/5">
+    <div class="flex justify-between items-center px-6 md:px-12 py-6 w-full max-w-[1920px] mx-auto">
+        <a href="#" class="flex items-center">
+            <img src="logo.png" alt="LH Construtora Logo" class="h-12 md:h-14 w-auto bg-white rounded shadow-lg p-1 hover:scale-105 transition-transform" loading="lazy" decoding="async">
+        </a>
+        <div class="hidden md:flex gap-6 md:gap-12 items-center">
+            <a class="font-headline uppercase tracking-widest text-xs font-bold text-[#c6c6d0] hover:text-[#ffb955] transition-colors" href="#about">SOBRE</a>
+            <a class="font-headline uppercase tracking-widest text-xs font-bold text-[#ffb955] border-b-2 border-[#ffb955] pb-1" href="#services">SERVIÇOS</a>
+            <a class="font-headline uppercase tracking-widest text-xs font-bold text-[#c6c6d0] hover:text-[#ffb955] transition-colors" href="#portfolio">PORTFÓLIO</a>
+            <a class="font-headline uppercase tracking-widest text-xs font-bold text-[#c6c6d0] hover:text-[#ffb955] transition-colors" href="#expertise">ESPECIALIDADES</a>
+        </div>
+        <a class="bg-secondary text-on-secondary px-6 py-3 font-headline font-bold text-xs tracking-widest uppercase hover:bg-secondary-container transition-all duration-300 btn-premium" href="https://wa.me/5561991005256" target="_blank">
+            AGENDAR CONSULTORIA TÉCNICA
+        </a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero relative w-full" style="min-height: 200vh;">
+    <div class="sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden z-10">
+        <video id="construction-video" playsinline muted preload="metadata" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+            <source src="casa-construcao.webm" type="video/webm">
+            <source src="casa-construcao.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/55 z-10 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/80 via-surface/60 to-surface-container-lowest z-10 pointer-events-none"></div>
+        <div class="relative z-20 text-center px-6 max-w-5xl">
+            <div class="fade-in-up" style="outline: none !important;">
+                <h1 class="font-headline font-extrabold text-4xl md:text-8xl tracking-tighter mb-6 leading-none text-white">
+                    Construímos com <span class="text-secondary">qualidade</span>.<br/>Entregamos com excelência.
+                </h1>
+            </div>
+            <p class="text-on-surface-variant text-lg md:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+                Engenharia civil com responsabilidade técnica e compromisso em cada detalhe.
+            </p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center">
+                <a class="bg-secondary text-on-secondary px-12 py-6 font-headline font-bold text-sm tracking-widest uppercase hover:translate-y-[-4px] transition-all shadow-2xl btn-premium" href="https://wa.me/5561991005256" target="_blank">
+                    AGENDAR CONSULTORIA TÉCNICA
+                </a>
+                <a class="border border-white/10 px-12 py-6 font-headline font-bold text-sm tracking-widest uppercase hover:bg-white/5 transition-all backdrop-blur-sm" href="#services">
+                    VER ESPECIALIDADES
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-12 z-20 hidden md:block">
+            <span class="text-xs tracking-widest text-on-surface-variant/50 uppercase font-headline">ROLE PARA DESCOBRIR</span>
+            <div class="w-[1px] h-24 bg-gradient-to-b from-secondary to-transparent mt-4 mx-auto"></div>
+        </div>
+    </div>
+</header>
+
+<!-- About Section -->
+<section class="py-16 md:py-32 px-6 md:px-12 bg-surface" id="about">
+    <div class="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <div class="relative">
+            <div class="absolute -top-12 -left-12 text-[12rem] font-headline font-black text-white/5 select-none leading-none">LH</div>
+            <h2 class="font-headline fade-in-up text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                Engenharia com <br/><span class="text-secondary">responsabilidade técnica</span>
+            </h2>
+            <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed max-w-xl">
+                <p>
+                    Sob a liderança do engenheiro <strong class="text-on-surface">Luiz Henrique (CREA 27181/D-DF)</strong>, a LH Construtora nasceu da visão de transformar o cenário da construção civil em Brasília através de processos rigorosos e transparência absoluta.
+                </p>
+                <p>
+                    Não apenas construímos paredes; erguemos estruturas seguras e eficientes que respeitam as normas técnicas e os sonhos de nossos clientes.
+                </p>
+            </div>
+            <div class="grid grid-cols-3 gap-8 mt-16">
+                <div class="text-center md:text-left">
+                    <div class="text-3xl font-headline font-bold text-secondary">10+</div>
+                    <div class="text-[10px] tracking-widest uppercase text-outline font-bold mt-2">Obras Concluídas</div>
+                </div>
+                <div class="text-center md:text-left">
+                    <div class="text-3xl font-headline font-bold text-secondary">5+</div>
+                    <div class="text-[10px] tracking-widest uppercase text-outline font-bold mt-2">Anos no Mercado</div>
+                </div>
+                <div class="text-center md:text-left">
+                    <div class="text-3xl font-headline font-bold text-secondary">100%</div>
+                    <div class="text-[10px] tracking-widest uppercase text-outline font-bold mt-2">Compromisso</div>
+                </div>
+            </div>
+        </div>
+        <div class="relative group">
+            <div class="absolute inset-0 border border-secondary/30 translate-x-4 translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-500"></div>
+            <img class="relative z-10 w-full aspect-[4/5] object-cover grayscale brightness-75 group-hover:grayscale-0 transition-all duration-700 reveal-mask" alt="Engenheiro" src="engenheiro.jpg" loading="lazy" decoding="async">
+        </div>
+    </div>
+</section>
+
+<!-- Services Section (Bento Grid Style) -->
+<section class="py-16 md:py-32 px-6 md:px-12 bg-surface-container-lowest" id="services">
+    <div class="max-w-[1920px] mx-auto">
+        <div class="mb-10 md:mb-20">
+            <span class="text-xs tracking-[0.3em] text-secondary uppercase font-bold block mb-4">NOSSAS ESPECIALIDADES</span>
+            <h2 class="font-headline fade-in-up text-4xl md:text-5xl font-bold tracking-tighter">Nossos Serviços</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+            <!-- Card 1 -->
+            <div class="md:col-span-3 glass-card p-12 group fade-in-up">
+                <span class="material-symbols-outlined text-4xl text-secondary mb-8 block group-hover:scale-110 transition-transform duration-500">architecture</span>
+                <h3 class="font-headline text-2xl font-bold mb-4">Projetos em Geral</h3>
+                <p class="text-on-surface-variant leading-relaxed">Concepção arquitetônica e estrutural integrada para máxima eficiência construtiva.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="md:col-span-3 glass-card p-12 group fade-in-up">
+                <span class="material-symbols-outlined text-4xl text-secondary mb-8 block group-hover:scale-110 transition-transform duration-500">handyman</span>
+                <h3 class="font-headline text-2xl font-bold mb-4">Construções e Reformas</h3>
+                <p class="text-on-surface-variant leading-relaxed">Execução de ponta a ponta, do alicerce ao acabamento fino com equipe especializada.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="md:col-span-2 glass-card p-12 group fade-in-up">
+                <span class="material-symbols-outlined text-4xl text-secondary mb-8 block group-hover:scale-110 transition-transform duration-500">task_alt</span>
+                <h3 class="font-headline text-xl font-bold mb-4">Aprovações de Projetos</h3>
+                <p class="text-on-surface-variant text-sm">Legalização junto aos órgãos competentes e prefeituras.</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="md:col-span-2 glass-card p-12 group fade-in-up">
+                <span class="material-symbols-outlined text-4xl text-secondary mb-8 block group-hover:scale-110 transition-transform duration-500">visibility</span>
+                <h3 class="font-headline text-xl font-bold mb-4">Fiscalização e Execução</h3>
+                <p class="text-on-surface-variant text-sm">Monitoramento rigoroso do cronograma e qualidade técnica da obra.</p>
+            </div>
+            <!-- Card 5 -->
+            <div class="md:col-span-2 glass-card p-12 group fade-in-up">
+                <span class="material-symbols-outlined text-4xl text-secondary mb-8 block group-hover:scale-110 transition-transform duration-500">verified</span>
+                <h3 class="font-headline text-xl font-bold mb-4">Responsabilidade Técnica</h3>
+                <p class="text-on-surface-variant text-sm">ART e suporte profissional certificado por engenheiro sênior.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section (Asymmetric Masonry) -->
+<section class="py-16 md:py-32 px-6 md:px-12 bg-surface" id="portfolio">
+    <div class="max-w-[1920px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-20 gap-8">
+            <div>
+                <span class="text-xs tracking-[0.3em] text-secondary uppercase font-bold block mb-4">OBRAS ATIVAS</span>
+                <h2 class="font-headline fade-in-up text-4xl md:text-5xl font-bold tracking-tighter">Obras em Andamento</h2>
+            </div>
+            <div class="text-right">
+                <p class="text-on-surface-variant max-w-md">Transformando o skyline de Brasília com projetos residenciais e comerciais de alto padrão.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-8 fade-in-up">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Obra residencial" src="portfolio-1.jpg" loading="lazy" decoding="async">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
+                        <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Em Andamento</span>
+                        <h4 class="font-headline text-xl font-bold">Residencial Azaleia</h4>
+                        <p class="text-sm text-on-surface-variant">Valparaíso de Goiás, GO</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Prédio corporativo" src="portfolio-2.jpg" loading="lazy" decoding="async">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
+                        <span class="inline-block bg-surface-variant text-on-surface-variant text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Fase de Acabamento</span>
+                        <h4 class="font-headline text-xl font-bold">Loja Conceito</h4>
+                        <p class="text-sm text-on-surface-variant">Gama, DF</p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-8 md:pt-12 fade-in-up">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[4/5] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Construção pesada" src="portfolio-3.jpg" loading="lazy" decoding="async">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
+                        <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Em Andamento</span>
+                        <h4 class="font-headline text-xl font-bold">Condomínio Flamboyant</h4>
+                        <p class="text-sm text-on-surface-variant">Santa Maria, DF</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[3/2] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Edifício alto padrão" src="portfolio-4.jpg" loading="lazy" decoding="async">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
+                        <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Fase Inicial</span>
+                        <h4 class="font-headline text-xl font-bold">Edifício Nexus</h4>
+                        <p class="text-sm text-on-surface-variant">Novo Gama, GO</p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-8 fade-in-up">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[3/5] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Instalação residencial" src="portfolio-5.jpg" loading="lazy" decoding="async">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
+                        <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Em Andamento</span>
+                        <h4 class="font-headline text-xl font-bold">Residencial Viver</h4>
+                        <p class="text-sm text-on-surface-variant">Valparaíso de Goiás, GO</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Projeto concluído" src="portfolio-6.jpg" loading="lazy" decoding="async">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
+                        <span class="inline-block bg-surface-variant text-on-surface-variant text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Concluído</span>
+                        <h4 class="font-headline text-xl font-bold">Villa Flora</h4>
+                        <p class="text-sm text-on-surface-variant">Cidade Ocidental, GO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-12 md:py-24 px-6 md:px-12 bg-surface-container-low text-on-surface" id="expertise">
+    <div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-12 text-center">
+        <div class="p-8 group">
+            <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">verified_user</span>
+            <h4 class="font-headline font-bold text-lg mb-2">Registro no CREA</h4>
+            <p class="text-on-surface-variant text-sm">Segurança jurídica e técnica total.</p>
+        </div>
+        <div class="p-8 group border-l border-outline/10">
+            <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">draw</span>
+            <h4 class="font-headline font-bold text-lg mb-2">Projetos Personalizados</h4>
+            <p class="text-on-surface-variant text-sm">Soluções sob medida para seu espaço.</p>
+        </div>
+        <div class="p-8 group border-l border-outline/10">
+            <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">timeline</span>
+            <h4 class="font-headline font-bold text-lg mb-2">Acompanhamento de Ponta a Ponta</h4>
+            <p class="text-on-surface-variant text-sm">Transparência em cada etapa.</p>
+        </div>
+        <div class="p-8 group border-l border-outline/10">
+            <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">request_quote</span>
+            <h4 class="font-headline font-bold text-lg mb-2">Orçamento Gratuito</h4>
+            <p class="text-on-surface-variant text-sm">Análise inicial sem compromisso.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-16 md:py-32 px-6 md:px-12 bg-surface-container-lowest">
+    <div class="max-w-[1920px] mx-auto">
+        <div class="text-center mb-10 md:mb-20">
+            <h2 class="font-headline fade-in-up text-4xl font-bold tracking-tighter">O que dizem nossos clientes</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+            <div class="glass-card group p-12 fade-in-up relative overflow-hidden">
+                <p class="text-on-surface-variant italic mb-8 relative z-10 leading-relaxed">
+                    "A LH Construtora superou todas as expectativas na reforma do meu apartamento na Asa Sul. O Luiz foi extremamente técnico e cumpriu todos os prazos."
+                </p>
+                <div>
+                    <h5 class="font-headline font-bold text-secondary group-hover:text-primary transition-colors">Ricardo Mendes</h5>
+                    <p class="text-xs text-outline uppercase tracking-widest font-bold mt-1">Brasília / DF</p>
+                </div>
+            </div>
+            <div class="glass-card group p-12 fade-in-up relative overflow-hidden">
+                <p class="text-on-surface-variant italic mb-8 relative z-10 leading-relaxed">
+                    "Contratei para a fiscalização da minha obra comercial e foi a melhor decisão. Economizei materiais e tive a tranquilidade que precisava."
+                </p>
+                <div>
+                    <h5 class="font-headline font-bold text-secondary group-hover:text-primary transition-colors">Mariana Santos</h5>
+                    <p class="text-xs text-outline uppercase tracking-widest font-bold mt-1">Sudoeste / DF</p>
+                </div>
+            </div>
+            <div class="glass-card group p-12 fade-in-up relative overflow-hidden">
+                <p class="text-on-surface-variant italic mb-8 relative z-10 leading-relaxed">
+                    "Engenheiro muito qualificado. A aprovação do projeto na prefeitura foi super rápida graças ao suporte técnico dele."
+                </p>
+                <div>
+                    <h5 class="font-headline font-bold text-secondary group-hover:text-primary transition-colors">André Vasconcelos</h5>
+                    <p class="text-xs text-outline uppercase tracking-widest font-bold mt-1">Lago Norte / DF</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 md:py-32 px-6 md:px-12 bg-primary-container relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-10">
+        <img class="w-full h-full object-cover" alt="Technical blueprint" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj5F14TbeAYzZ_ua5vfvvkcpgyDcHN8NNEB7B8dyTcVkVXifhfGzwhXXoOV9amUBFqtZ-FtRuhj2mrVZqvkSiRPrTfTo5M8ZoY8B7gSbfzvo3lLfhYv1dJydVrFmPCYKeCherR27cORschcVZFXDwjYblJ0yXIgQX57cza3Qobh968tfOZqO9BjOY_h5DTfZOP6lGZW8oZdg32l5M3tZnBdWzAvQc2jK41OiPRa_RA9Ai7oqW8gBKeU-cQcWEhlJ2qjW4c6eGc-9Q" loading="lazy" decoding="async">
+    </div>
+    <div class="max-w-[1920px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Left Side: Text -->
+        <div class="text-left fade-in-up">
+            <h2 class="font-headline text-4xl md:text-6xl font-bold tracking-tighter mb-8 text-white">Pronto para começar sua obra?</h2>
+            <p class="text-white/80 text-xl max-w-xl leading-relaxed mb-12">
+                Transforme seus planos em realidade com a segurança de um engenheiro registrado e comprometido com a excelência do seu projeto.
+            </p>
+            <div class="flex items-center gap-4 text-white/90 font-label font-bold tracking-widest uppercase text-sm mb-6">
+                <span class="material-symbols-outlined text-secondary">verified</span>
+                <span>Projetos 100% Legalizados</span>
+            </div>
+            <div class="flex items-center gap-4 text-white/90 font-label font-bold tracking-widest uppercase text-sm">
+                <span class="material-symbols-outlined text-secondary">engineering</span>
+                <span>Fiscalização Rigorosa</span>
+            </div>
+        </div>
+
+        <!-- Right Side: Contact Form -->
+        <div class="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-8 md:p-12 shadow-2xl fade-in-up">
+            <form id="whatsapp-form" class="flex flex-col gap-6">
+                <!-- Name Field -->
+                <div class="group">
+                    <label for="form-name" class="block font-label text-xs tracking-widest uppercase text-on-primary-container mb-2 font-bold group-focus-within:text-secondary transition-colors">Seu Nome Completo</label>
+                    <input type="text" id="form-name" required placeholder="Ex: João da Silva" class="w-full rounded-sm bg-surface-container-highest border border-outline/30 text-on-surface p-4 focus:ring-2 focus:ring-secondary/30 focus:border-secondary outline-none transition-all duration-300 placeholder:text-on-surface-variant/40">
+                </div>
+                
+                <!-- Location Field (New) -->
+                <div class="group">
+                    <label for="form-location" class="block font-label text-xs tracking-widest uppercase text-on-primary-container mb-2 font-bold group-focus-within:text-secondary transition-colors">Cidade / Bairro da Obra</label>
+                    <input type="text" id="form-location" required placeholder="Ex: Águas Claras, DF" class="w-full rounded-sm bg-surface-container-highest border border-outline/30 text-on-surface p-4 focus:ring-2 focus:ring-secondary/30 focus:border-secondary outline-none transition-all duration-300 placeholder:text-on-surface-variant/40">
+                </div>
+
+                <!-- Service Selection -->
+                <div class="group">
+                    <label for="form-service" class="block font-label text-xs tracking-widest uppercase text-on-primary-container mb-2 font-bold group-focus-within:text-secondary transition-colors">O que você precisa?</label>
+                    <div class="relative">
+                        <select id="form-service" required class="w-full rounded-sm bg-surface-container-highest border border-outline/30 text-on-surface p-4 pr-12 focus:ring-2 focus:ring-secondary/30 focus:border-secondary outline-none transition-all duration-300 appearance-none cursor-pointer">
+                            <option value="" disabled selected>Selecione uma especialidade...</option>
+                            <option value="Projetos em Geral">Projetos em Geral (Arquitetura/Estrutura)</option>
+                            <option value="Construções e Reformas">Construções e Reformas</option>
+                            <option value="Aprovações de Projetos">Aprovações de Projetos</option>
+                            <option value="Fiscalização e Execução">Fiscalização e Execução de Obra</option>
+                            <option value="Outros">Outro Serviço</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface-variant group-focus-within:text-secondary transition-colors">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Details -->
+                <div class="group">
+                    <label for="form-details" class="block font-label text-xs tracking-widest uppercase text-on-primary-container mb-2 font-bold group-focus-within:text-secondary transition-colors">Detalhes do Projeto</label>
+                    <textarea id="form-details" required rows="4" placeholder="Conte-nos um pouco sobre a sua necessidade..." class="w-full rounded-sm bg-surface-container-highest border border-outline/30 text-on-surface p-4 focus:ring-2 focus:ring-secondary/30 focus:border-secondary outline-none transition-all duration-300 placeholder:text-on-surface-variant/40 resize-none"></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="group flex justify-center items-center gap-3 rounded-sm bg-secondary text-on-secondary px-8 py-5 mt-4 font-headline font-bold text-sm tracking-widest uppercase hover:bg-secondary-container transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(255,185,85,0.2)]">
+                    INICIAR CONSULTORIA TÉCNICA
+                    <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] text-on-surface py-12 md:py-24 px-6 md:px-12 border-t border-outline-variant/20">
+    <div class="max-w-[1920px] mx-auto flex flex-col items-center text-center mb-16 md:mb-24 fade-in-up">
+        <img src="logo-png-footer.png" alt="LH Construtora Logo" class="h-28 md:h-52 w-auto drop-shadow-2xl hover:scale-105 transition-transform mb-10" loading="lazy" decoding="async">
+        <p class="text-on-surface-variant text-base md:text-lg max-w-md mb-8 leading-relaxed">
+            Excelência em engenharia civil e compromisso técnico em todo o Distrito Federal.
+        </p>
+        <div class="flex items-center justify-center gap-2 bg-surface-container p-4 rounded border border-outline/10">
+            <span class="material-symbols-outlined text-secondary">verified</span>
+            <span class="font-label font-bold text-xs uppercase tracking-widest text-on-surface">Eng. Luiz Henrique • CREA 27181/D-DF</span>
+        </div>
+    </div>
+    <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left fade-in-up">
+        <div class="flex flex-col items-center md:items-start">
+            <h6 class="font-headline font-bold text-sm tracking-widest uppercase mb-8">Navegação</h6>
+            <ul class="space-y-4 font-label text-sm text-on-surface-variant flex flex-col items-center md:items-start">
+                <li><a class="hover:text-secondary transition-colors" href="#">INÍCIO</a></li>
+                <li><a class="hover:text-secondary transition-colors" href="#about">SOBRE NÓS</a></li>
+                <li><a class="hover:text-secondary transition-colors" href="#services">SERVIÇOS</a></li>
+                <li><a class="hover:text-secondary transition-colors" href="#portfolio">PORTFÓLIO</a></li>
+            </ul>
+        </div>
+        <div class="flex flex-col items-center md:items-start">
+            <h6 class="font-headline font-bold text-sm tracking-widest uppercase mb-8">Contato</h6>
+            <ul class="space-y-4 font-label text-sm text-on-surface-variant flex flex-col items-center md:items-start">
+                <li class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-secondary text-sm">call</span>
+                    (61) 99100-5256
+                </li>
+                <li class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-secondary text-sm">alternate_email</span>
+                    contato@lhconstrutora.com
+                </li>
+                <li class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+                    Brasília, Distrito Federal
+                </li>
+            </ul>
+        </div>
+        <div class="flex flex-col items-center md:items-start">
+            <h6 class="font-headline font-bold text-sm tracking-widest uppercase mb-8">Social</h6>
+            <a class="flex items-center gap-3 hover:text-secondary transition-colors group" href="https://instagram.com/lh.construtora03" target="_blank">
+                <div class="w-10 h-10 border border-outline/20 flex items-center justify-center group-hover:border-secondary transition-colors">
+                    <span class="material-symbols-outlined text-lg">photo_camera</span>
+                </div>
+                <span class="font-label text-sm font-bold">@lh.construtora03</span>
+            </a>
+        </div>
+    </div>
+    <div class="max-w-[1920px] mx-auto border-t border-outline-variant/10 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-body text-sm tracking-tight text-on-surface-variant/50">
+            © 2026 LH CONSTRUTORA. EXCELÊNCIA ARQUITETÔNICA.
+        </p>
+        <div class="flex gap-8 font-label text-xs tracking-widest uppercase font-bold text-on-surface-variant/50">
+            <a class="hover:text-secondary transition-colors" href="#">POLÍTICA DE PRIVACIDADE</a>
+            <a class="hover:text-secondary transition-colors" href="#">TERMOS DE SERVIÇO</a>
+            <a class="hover:text-secondary transition-colors" href="#">MAPA DO SITE</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a class="fixed bottom-10 right-10 z-[100] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95 group" href="https://wa.me/5561991005256" target="_blank">
+    <div class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></div>
+    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+    </svg>
+</a>
+</body>
+</html>
