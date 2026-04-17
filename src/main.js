@@ -1,7 +1,7 @@
 import './style.css'
 
-// Lógica para sincronizar o vídeo da Hero com o scroll
-document.addEventListener('DOMContentLoaded', () => {
+// Função para inicializar as animações
+function initAnimations() {
   const heroSection = document.querySelector('.hero');
   const video = document.querySelector('#construction-video');
 
@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
             video.currentTime = progress * video.duration;
           }
       }
-    });
+    }, { passive: true });
   }
 
-  // Navbar transparente/blur ao scrollar com borda dinâmica
+  // Navbar transparente/blur ao scrollar
   const nav = document.querySelector('nav');
   if (nav) {
     window.addEventListener('scroll', () => {
@@ -30,37 +30,43 @@ document.addEventListener('DOMContentLoaded', () => {
         nav.classList.remove('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
         nav.classList.add('bg-surface/60');
       }
-    });
+    }, { passive: true });
   }
 
-  // Animações em Cascata (Staggered Animation)
+  // Animações de Interseção
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Se o elemento pai for um grid, aplica delay baseado na posição
-        const parent = entry.target.parentElement;
-        if (parent && (parent.classList.contains('grid') || parent.id === 'services' || parent.classList.contains('space-y-8'))) {
+        const el = entry.target;
+        
+        // Aplica delay para elementos em grupo
+        const parent = el.parentElement;
+        if (parent && (parent.classList.contains('grid') || parent.classList.contains('space-y-8'))) {
           const siblings = Array.from(parent.querySelectorAll('.fade-in-up, .reveal-mask'));
-          const index = siblings.indexOf(entry.target);
+          const index = siblings.indexOf(el);
           if (index !== -1) {
-            entry.target.style.transitionDelay = `${index * 0.15}s`;
+            el.style.transitionDelay = `${index * 0.1}s`;
           }
         }
         
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        el.classList.add('visible');
+        observer.unobserve(el);
       }
     });
   }, observerOptions);
 
-  document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => {
+    observer.observe(el);
+  });
+}
 
-  // Lógica do Formulário de WhatsApp
+// Formulário de WhatsApp
+function initForm() {
   const form = document.getElementById('whatsapp-form');
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -76,4 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
       window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
     });
   }
-});
+}
+
+// Inicializa tudo
+initAnimations();
+initForm();
