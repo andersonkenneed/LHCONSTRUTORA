@@ -1,59 +1,38 @@
 import './style.css'
 
-/**
- * MOTOR DE SINCRONIA SUAVE (SMOOTH VIDEO SCROLL)
- * Usa Interpolação Linear (Lerp) para remover os "pulos" do vídeo.
- */
+// Sincronia de Vídeo Direta (Simples e Estável)
 function initVideoScroll() {
   const video = document.querySelector('#construction-video');
   const hero = document.querySelector('.hero');
   if (!video || !hero) return;
 
-  let targetTime = 0;
-  let currentTime = 0;
-  const lerpFactor = 0.08; // Quanto menor, mais suave e "lento" o ajuste (0.05 a 0.1 é o ideal)
+  video.pause();
 
-  // Função que roda a cada frame da tela (60fps ou 120fps)
-  function render() {
-    if (video.duration) {
-      // Suavização: currentTime caminha em direção ao targetTime gradualmente
-      currentTime += (targetTime - currentTime) * lerpFactor;
-      
-      // Evita processamento desnecessário se a diferença for mínima
-      if (Math.abs(targetTime - currentTime) > 0.001) {
-        video.currentTime = currentTime;
-      }
-    }
-    requestAnimationFrame(render);
-  }
-
-  // Atualiza apenas o objetivo (target) no scroll
-  const handleScroll = () => {
+  const updateTime = () => {
     const scrollY = window.scrollY;
-    const scrollMax = hero.offsetHeight; // Ajuste para a altura da seção hero
-    const progress = Math.max(0, Math.min(scrollY / scrollMax, 1));
-    targetTime = progress * video.duration;
+    const progress = Math.max(0, Math.min(scrollY / hero.offsetHeight, 1));
+    
+    if (video.duration) {
+      video.currentTime = video.duration * progress;
+    }
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-
-  // Desbloqueio para Mobile (Obrigatório para iOS/Android permitirem controle de seek)
+  window.addEventListener('scroll', updateTime, { passive: true });
+  
   const unlock = () => {
     video.play().then(() => {
       video.pause();
+      updateTime();
     }).catch(() => {});
     window.removeEventListener('touchstart', unlock);
     window.removeEventListener('click', unlock);
   };
-  window.addEventListener('touchstart', unlock, { passive: true });
-  window.addEventListener('click', unlock, { passive: true });
-
-  // Inicia o loop de renderização
-  requestAnimationFrame(render);
+  window.addEventListener('touchstart', unlock);
+  window.addEventListener('click', unlock);
 }
 
-// Animações de Interseção (Fade-in das seções)
-function initUI() {
+// Animações de Interseção
+function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -67,24 +46,23 @@ function initUI() {
   });
 }
 
-// Formulário de WhatsApp
+// Formulário
 function initForm() {
   const form = document.getElementById('whatsapp-form');
-  if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('form-name').value;
-    const location = document.getElementById('form-location').value;
-    const service = document.getElementById('form-service').value;
-    const details = document.getElementById('form-details').value;
-    const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
-    window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
-  });
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('form-name').value;
+      const location = document.getElementById('form-location').value;
+      const service = document.getElementById('form-service').value;
+      const details = document.getElementById('form-details').value;
+      const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
+      window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
+    });
+  }
 }
 
-// Inicialização ao carregar a página
-window.addEventListener('load', () => {
-  initVideoScroll();
-  initUI();
-  initForm();
-});
+// Inicializa
+initVideoScroll();
+initAnimations();
+initForm();
