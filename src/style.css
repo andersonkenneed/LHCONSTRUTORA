@@ -91,28 +91,11 @@
     -webkit-font-smoothing: antialiased;
   }
   
-  /* IMAGENS SEMPRE VISÍVEIS POR PADRÃO */
-  .fade-in-up {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  .reveal-mask {
-    opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    transition: clip-path 1s ease-in-out, opacity 1s ease-in-out;
-  }
-
-  /* ESTADO DE ANIMAÇÃO (Opcional, apenas se o JS funcionar) */
-  .fade-in-up.ready {
-    opacity: 0.2; /* Fica clarinho em vez de sumir */
-    transform: translateY(20px);
-  }
-  
-  .fade-in-up.visible {
+  /* IMAGENS VISÍVEIS POR PADRÃO - SEM ERROS */
+  .fade-in-up, .reveal-mask {
     opacity: 1 !important;
     transform: translateY(0) !important;
+    clip-path: none !important;
   }
 
   .btn-premium {
