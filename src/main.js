@@ -1,25 +1,40 @@
 import './style.css'
 
-// Função para inicializar as animações
-function initAnimations() {
+// Lógica de sincronização do vídeo com suavização (Smooth Scroll Video)
+function initVideoScroll() {
   const heroSection = document.querySelector('.hero');
   const video = document.querySelector('#construction-video');
+  if (!heroSection || !video) return;
 
-  if (heroSection && video) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const totalVisibleScroll = heroSection.offsetHeight;
-      
-      if (scrollY <= totalVisibleScroll) {
-          const progress = Math.min(scrollY / totalVisibleScroll, 1);
-          if (video.readyState >= 2) {
-            video.currentTime = progress * video.duration;
-          }
-      }
-    }, { passive: true });
+  let targetTime = 0;
+  let currentTime = 0;
+  const accel = 0.1; // Fator de suavização (menor = mais suave)
+
+  // Atualiza o tempo do vídeo via RequestAnimationFrame para máxima fluidez
+  function updateVideo() {
+    if (video.readyState >= 2) {
+      currentTime += (targetTime - currentTime) * accel;
+      video.currentTime = currentTime;
+    }
+    requestAnimationFrame(updateVideo);
   }
 
-  // Navbar transparente/blur ao scrollar
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const height = heroSection.offsetHeight;
+    
+    if (scrollY <= height) {
+      const progress = scrollY / height;
+      targetTime = progress * video.duration;
+    }
+  }, { passive: true });
+
+  requestAnimationFrame(updateVideo);
+}
+
+// Navbar e Animações de Interseção
+function initUI() {
+  // Navbar
   const nav = document.querySelector('nav');
   if (nav) {
     window.addEventListener('scroll', () => {
@@ -33,57 +48,44 @@ function initAnimations() {
     }, { passive: true });
   }
 
-  // Animações de Interseção
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -10% 0px'
-  };
-
+  // Intersection Observer para as máscaras e fades
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const el = entry.target;
-        
-        // Aplica delay para elementos em grupo
         const parent = el.parentElement;
+        
         if (parent && (parent.classList.contains('grid') || parent.classList.contains('space-y-8'))) {
           const siblings = Array.from(parent.querySelectorAll('.fade-in-up, .reveal-mask'));
           const index = siblings.indexOf(el);
-          if (index !== -1) {
-            el.style.transitionDelay = `${index * 0.1}s`;
-          }
+          if (index !== -1) el.style.transitionDelay = `${index * 0.1}s`;
         }
         
         el.classList.add('visible');
         observer.unobserve(el);
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
 
-  document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => {
-    observer.observe(el);
+  document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => observer.observe(el));
+}
+
+// Formulário WhatsApp
+function initForm() {
+  const form = document.getElementById('whatsapp-form');
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('form-name').value;
+    const location = document.getElementById('form-location').value;
+    const service = document.getElementById('form-service').value;
+    const details = document.getElementById('form-details').value;
+    const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
+    window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
   });
 }
 
-// Formulário de WhatsApp
-function initForm() {
-  const form = document.getElementById('whatsapp-form');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById('form-name').value;
-      const location = document.getElementById('form-location').value;
-      const service = document.getElementById('form-service').value;
-      const details = document.getElementById('form-details').value;
-      
-      const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
-      
-      window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
-    });
-  }
-}
-
-// Inicializa tudo
-initAnimations();
+// Iniciar todas as funções
+initVideoScroll();
+initUI();
 initForm();
