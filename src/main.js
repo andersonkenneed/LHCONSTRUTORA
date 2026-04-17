@@ -21,38 +21,45 @@ function initVideoScroll() {
   let targetTime = 0;
   let currentTime = 0;
   
-  // No Desktop usamos um valor maior para resposta mais rápida, 
-  // No mobile usamos um valor ajustado especificamente para curar o "delay" da tela ao arrastar
-  const accel = isMobile ? 0.18 : 0.12; 
+  // No Desktop usamos um valor suave.
+  // No Mobile vamos ignorar essa variável e aplicar a rotação direta (zero delay).
+  const accel = 0.12; 
 
-  // Função para atualizar o frame do vídeo
+  // Função para atualizar o frame do vídeo (Apenas Desktop)
   function updateVideo() {
-    if (video.readyState >= 2 && !isNaN(targetTime)) {
+    if (!isMobile && video.readyState >= 2 && !isNaN(targetTime)) {
       currentTime += (targetTime - currentTime) * accel;
       
-      // No mobile compensamos travamentos se o tempo atual já estourar quase na frente
       if (Math.abs(targetTime - currentTime) > 0.001) {
         try {
           video.currentTime = currentTime;
         } catch(e) {}
       }
     }
-    requestAnimationFrame(updateVideo);
+    if (!isMobile) {
+      requestAnimationFrame(updateVideo);
+    }
   }
 
   // Listener de Scroll
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY || window.pageYOffset;
-    // Diferença correta. A seção rola enquanto a altura for maior que a janela.
     const maxScroll = heroSection.offsetHeight - window.innerHeight;
     
     if (maxScroll > 0 && scrollY <= heroSection.offsetHeight) {
       let progress = scrollY / maxScroll;
-      progress = Math.min(Math.max(progress, 0), 1); // Clamp entre 0 e 1
+      progress = Math.min(Math.max(progress, 0), 1); 
       
-      // Guardar contra video.duration que começa como NaN
       if (video.duration && !isNaN(video.duration)) {
         targetTime = progress * video.duration;
+        
+        // No celular, o arrastar do dedo já atualiza pixel por pixel (60fps). 
+        // Aplicamos direto na raiz do vídeo para garantir ZERO atraso de cálculo.
+        if (isMobile && video.readyState >= 2) {
+            try {
+                video.currentTime = targetTime;
+            } catch(e) {}
+        }
       }
     }
   }, { passive: true });
