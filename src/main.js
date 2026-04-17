@@ -1,6 +1,9 @@
 import './style.css'
 
-// Lógica de sincronização do vídeo com suavização (Smooth Scroll Video)
+// Ativa as animações no CSS apenas se o JS carregar
+document.documentElement.classList.add('js-enabled');
+
+// Lógica de sincronização do vídeo com suavização
 function initVideoScroll() {
   const heroSection = document.querySelector('.hero');
   const video = document.querySelector('#construction-video');
@@ -8,13 +11,15 @@ function initVideoScroll() {
 
   let targetTime = 0;
   let currentTime = 0;
-  const accel = 0.1; // Fator de suavização (menor = mais suave)
+  const accel = 0.1;
 
-  // Atualiza o tempo do vídeo via RequestAnimationFrame para máxima fluidez
   function updateVideo() {
     if (video.readyState >= 2) {
       currentTime += (targetTime - currentTime) * accel;
-      video.currentTime = currentTime;
+      // Evita atualização se a diferença for imperceptível
+      if (Math.abs(targetTime - currentTime) > 0.001) {
+        video.currentTime = currentTime;
+      }
     }
     requestAnimationFrame(updateVideo);
   }
@@ -22,7 +27,6 @@ function initVideoScroll() {
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const height = heroSection.offsetHeight;
-    
     if (scrollY <= height) {
       const progress = scrollY / height;
       targetTime = progress * video.duration;
@@ -48,24 +52,20 @@ function initUI() {
     }, { passive: true });
   }
 
-  // Intersection Observer para as máscaras e fades
+  // Intersection Observer
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -5% 0px'
+  };
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const parent = el.parentElement;
-        
-        if (parent && (parent.classList.contains('grid') || parent.classList.contains('space-y-8'))) {
-          const siblings = Array.from(parent.querySelectorAll('.fade-in-up, .reveal-mask'));
-          const index = siblings.indexOf(el);
-          if (index !== -1) el.style.transitionDelay = `${index * 0.1}s`;
-        }
-        
-        el.classList.add('visible');
-        observer.unobserve(el);
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
+  }, observerOptions);
 
   document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => observer.observe(el));
 }
@@ -85,7 +85,15 @@ function initForm() {
   });
 }
 
-// Iniciar todas as funções
-initVideoScroll();
-initUI();
-initForm();
+// Iniciar quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initVideoScroll();
+    initUI();
+    initForm();
+  });
+} else {
+  initVideoScroll();
+  initUI();
+  initForm();
+}
