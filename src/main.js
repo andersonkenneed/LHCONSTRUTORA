@@ -1,6 +1,6 @@
 import './style.css'
 
-// Controle do Vídeo com Sincronia de Scroll (Smooth & Mobile Friendly)
+// Motor de Sincronia de Vídeo de Alta Performance
 function initVideoScroll() {
   const heroSection = document.querySelector('.hero');
   const video = document.querySelector('#construction-video');
@@ -8,77 +8,93 @@ function initVideoScroll() {
 
   let targetTime = 0;
   let currentTime = 0;
-  const accel = 0.12;
+  const accel = 0.15; // Aceleração levemente maior para resposta mais rápida
 
-  // Função para atualizar o frame do vídeo
+  // Função principal de atualização
   function updateVideo() {
-    if (video.readyState >= 2) {
+    if (video.duration) {
+      // Cálculo de interpolação (suavização)
       currentTime += (targetTime - currentTime) * accel;
-      if (Math.abs(targetTime - currentTime) > 0.001) {
+      
+      // Só atualiza se o vídeo não estiver ocupado processando e a diferença for relevante
+      if (!video.seeking && Math.abs(targetTime - currentTime) > 0.01) {
         video.currentTime = currentTime;
       }
     }
-    requestAnimationFrame(updateVideo);
+    
+    // Usa a API mais moderna se disponível, senão volta para requestAnimationFrame
+    if ('requestVideoFrameCallback' in video) {
+      video.requestVideoFrameCallback(updateVideo);
+    } else {
+      requestAnimationFrame(updateVideo);
+    }
   }
 
-  // Listener de Scroll
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
+  // Atualiza o tempo alvo baseado no scroll
+  const onScroll = () => {
+    const scrollY = window.pageYOffset || window.scrollY;
     const height = heroSection.offsetHeight;
     if (scrollY <= height) {
-      const progress = scrollY / height;
-      targetTime = progress * video.duration;
+      const progress = Math.max(0, Math.min(scrollY / height, 1));
+      targetTime = progress * (video.duration || 0);
     }
-  }, { passive: true });
+  };
 
-  // "Destrava" o vídeo no mobile ao primeiro toque ou clique
-  const unlockVideo = () => {
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // TRUQUE PARA MOBILE: "Acorda" o hardware de vídeo no primeiro toque
+  const unlock = () => {
     video.play().then(() => {
       video.pause();
-      window.removeEventListener('touchstart', unlockVideo);
-      window.removeEventListener('mousedown', unlockVideo);
-    }).catch(e => console.log("Aguardando interação..."));
+      console.log("Vídeo desbloqueado para scroll");
+    }).catch(err => console.log("Aguardando interação para vídeo..."));
+    
+    window.removeEventListener('touchstart', unlock);
+    window.removeEventListener('click', unlock);
   };
-  window.addEventListener('touchstart', unlockVideo, { passive: true });
-  window.addEventListener('mousedown', unlockVideo, { passive: true });
 
-  requestAnimationFrame(updateVideo);
+  window.addEventListener('touchstart', unlock, { passive: true });
+  window.addEventListener('click', unlock, { passive: true });
+
+  // Inicia o loop
+  if ('requestVideoFrameCallback' in video) {
+    video.requestVideoFrameCallback(updateVideo);
+  } else {
+    requestAnimationFrame(updateVideo);
+  }
 }
 
-// Navbar e Animações de Elementos
+// Interface e Animações
 function initUI() {
-  // Navbar dinâmico
   const nav = document.querySelector('nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
-        nav.classList.remove('bg-surface/60');
-      } else {
-        nav.classList.remove('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
-        nav.classList.add('bg-surface/60');
-      }
-    }, { passive: true });
-  }
-
-  // Animações de Interseção
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.1 });
 
-  // Seleciona e ativa a animação nos elementos
+  // Navbar
+  window.addEventListener('scroll', () => {
+    if (nav) {
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-surface/90', 'backdrop-blur-xl', 'shadow-xl');
+      } else {
+        nav.classList.remove('bg-surface/90', 'backdrop-blur-xl', 'shadow-xl');
+      }
+    }
+  }, { passive: true });
+
+  // Ativa observador apenas se os elementos existirem
   document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => {
-    el.classList.add('ready'); // Só agora o CSS aplica o estado de animação
     observer.observe(el);
+    // Força visibilidade inicial mínima para segurança
+    el.style.opacity = "1"; 
   });
 }
 
-// Formulário WhatsApp
+// Formulário
 function initForm() {
   const form = document.getElementById('whatsapp-form');
   if (!form) return;
@@ -93,15 +109,9 @@ function initForm() {
   });
 }
 
-// Inicialização segura
-const start = () => {
+// Start
+window.addEventListener('load', () => {
   initVideoScroll();
   initUI();
   initForm();
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', start);
-} else {
-  start();
-}
+});
