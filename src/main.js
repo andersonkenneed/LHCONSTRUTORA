@@ -85,16 +85,33 @@ function initVideoScroll() {
 
 // Navbar e Animações de Elementos
 function initUI() {
-  // Navbar dinâmico
+  // Navbar dinâmico e Botão do WhatsApp
   const nav = document.querySelector('nav');
-  if (nav) {
+  const floatingBtn = document.getElementById('floating-whatsapp');
+  
+  if (nav || floatingBtn) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
-        nav.classList.remove('bg-surface/60');
-      } else {
-        nav.classList.remove('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
-        nav.classList.add('bg-surface/60');
+      const scrollY = window.scrollY;
+      
+      if (nav) {
+        if (scrollY > 50) {
+          nav.classList.add('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
+          nav.classList.remove('bg-surface/60');
+        } else {
+          nav.classList.remove('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
+          nav.classList.add('bg-surface/60');
+        }
+      }
+
+      // Mostra o botão flutuante apenas após passar da primeira tela (Hero)
+      if (floatingBtn) {
+        if (scrollY > window.innerHeight * 0.5) {
+          floatingBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
+          floatingBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          floatingBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+          floatingBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        }
       }
     }, { passive: true });
   }
