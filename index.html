@@ -31,7 +31,7 @@
 <!-- Hero Section -->
 <header class="hero relative w-full" style="min-height: 200vh;">
     <div class="sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden z-10">
-        <video id="construction-video" playsinline muted preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+        <video id="construction-video" playsinline muted preload="metadata" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
             <source src="/casa-construcao.webm" type="video/webm">
             <source src="/casa-construcao.mp4" type="video/mp4">
         </video>
@@ -95,7 +95,7 @@
         </div>
         <div class="relative group">
             <div class="absolute inset-0 border border-secondary/30 translate-x-4 translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-500"></div>
-            <img class="relative z-10 w-full aspect-[4/5] object-cover transition-all duration-700 fade-in-up" alt="Engenheiro" src="/engenheiro.jpg" loading="lazy" decoding="async">
+            <img class="relative z-10 w-full aspect-[4/5] object-cover grayscale brightness-75 group-hover:grayscale-0 transition-all duration-700 reveal-mask" alt="Engenheiro" src="/engenheiro.jpg" loading="lazy" decoding="async">
         </div>
     </div>
 </section>
@@ -155,17 +155,17 @@
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="space-y-8">
-                <div class="relative group overflow-hidden fade-in-up">
-                    <img class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-[2000ms]" alt="Obra residencial" src="/portfolio-1.jpg" loading="lazy" decoding="async">
+            <div class="space-y-8 fade-in-up">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Obra residencial" src="/portfolio-1.jpg" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
                         <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Em Andamento</span>
                         <h4 class="font-headline text-xl font-bold">Residencial Azaleia</h4>
                         <p class="text-sm text-on-surface-variant">Valparaíso de Goiás, GO</p>
                     </div>
                 </div>
-                <div class="relative group overflow-hidden fade-in-up">
-                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-[2000ms]" alt="Prédio corporativo" src="/portfolio-2.jpg" loading="lazy" decoding="async">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Prédio corporativo" src="/portfolio-2.jpg" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
                         <span class="inline-block bg-surface-variant text-on-surface-variant text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Fase de Acabamento</span>
                         <h4 class="font-headline text-xl font-bold">Loja Conceito</h4>
@@ -173,17 +173,17 @@
                     </div>
                 </div>
             </div>
-            <div class="space-y-8 md:pt-12">
-                <div class="relative group overflow-hidden fade-in-up">
-                    <img class="w-full aspect-[4/5] object-cover group-hover:scale-110 transition-transform duration-[2000ms]" alt="Construção pesada" src="/portfolio-3.jpg" loading="lazy" decoding="async">
+            <div class="space-y-8 md:pt-12 fade-in-up">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[4/5] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Construção pesada" src="/portfolio-3.jpg" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
                         <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Em Andamento</span>
                         <h4 class="font-headline text-xl font-bold">Condomínio Flamboyant</h4>
                         <p class="text-sm text-on-surface-variant">Santa Maria, DF</p>
                     </div>
                 </div>
-                <div class="relative group overflow-hidden fade-in-up">
-                    <img class="w-full aspect-[3/2] object-cover group-hover:scale-110 transition-transform duration-[2000ms]" alt="Edifício alto padrão" src="/portfolio-4.jpg" loading="lazy" decoding="async">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[3/2] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Edifício alto padrão" src="/portfolio-4.jpg" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
                         <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Fase Inicial</span>
                         <h4 class="font-headline text-xl font-bold">Edifício Nexus</h4>
@@ -191,17 +191,17 @@
                     </div>
                 </div>
             </div>
-            <div class="space-y-8">
-                <div class="relative group overflow-hidden fade-in-up">
-                    <img class="w-full aspect-[3/5] object-cover group-hover:scale-110 transition-transform duration-[2000ms]" alt="Instalação residencial" src="/portfolio-5.jpg" loading="lazy" decoding="async">
+            <div class="space-y-8 fade-in-up">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-[3/5] object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Instalação residencial" src="/portfolio-5.jpg" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
                         <span class="inline-block bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Em Andamento</span>
                         <h4 class="font-headline text-xl font-bold">Residencial Viver</h4>
                         <p class="text-sm text-on-surface-variant">Valparaíso de Goiás, GO</p>
                     </div>
                 </div>
-                <div class="relative group overflow-hidden fade-in-up">
-                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-[2000ms]" alt="Projeto concluído" src="/portfolio-6.jpg" loading="lazy" decoding="async">
+                <div class="relative group overflow-hidden">
+                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-[2000ms] reveal-mask" alt="Projeto concluído" src="/portfolio-6.jpg" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-container-lowest to-transparent">
                         <span class="inline-block bg-surface-variant text-on-surface-variant text-[10px] font-bold px-3 py-1 mb-4 uppercase tracking-tighter">Concluído</span>
                         <h4 class="font-headline text-xl font-bold">Villa Flora</h4>
@@ -216,22 +216,22 @@
 <!-- Why Choose Us -->
 <section class="py-12 md:py-24 px-6 md:px-12 bg-surface-container-low text-on-surface" id="expertise">
     <div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-12 text-center">
-        <div class="p-8 group fade-in-up">
+        <div class="p-8 group">
             <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">verified_user</span>
             <h4 class="font-headline font-bold text-lg mb-2">Registro no CREA</h4>
             <p class="text-on-surface-variant text-sm">Segurança jurídica e técnica total.</p>
         </div>
-        <div class="p-8 group border-l border-outline/10 fade-in-up">
+        <div class="p-8 group border-l border-outline/10">
             <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">draw</span>
             <h4 class="font-headline font-bold text-lg mb-2">Projetos Personalizados</h4>
             <p class="text-on-surface-variant text-sm">Soluções sob medida para seu espaço.</p>
         </div>
-        <div class="p-8 group border-l border-outline/10 fade-in-up">
+        <div class="p-8 group border-l border-outline/10">
             <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">timeline</span>
             <h4 class="font-headline font-bold text-lg mb-2">Acompanhamento de Ponta a Ponta</h4>
             <p class="text-on-surface-variant text-sm">Transparência em cada etapa.</p>
         </div>
-        <div class="p-8 group border-l border-outline/10 fade-in-up">
+        <div class="p-8 group border-l border-outline/10">
             <span class="material-symbols-outlined text-4xl text-secondary mb-6 block group-hover:scale-110 transition-transform">request_quote</span>
             <h4 class="font-headline font-bold text-lg mb-2">Orçamento Gratuito</h4>
             <p class="text-on-surface-variant text-sm">Análise inicial sem compromisso.</p>
