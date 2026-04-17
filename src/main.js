@@ -6,16 +6,27 @@ function initVideoScroll() {
   const video = document.querySelector('#construction-video');
   if (!heroSection || !video) return;
 
+  // Reforço no mobile: setar atributos explicitamente para garantir que iOS permita autoplay inline
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
+  video.setAttribute('muted', '');
+  video.muted = true;
+
+  // Forçar autoplay dinâmico inicial para baixar logo o frame
+  video.play().then(() => video.pause()).catch(() => {});
+
   let targetTime = 0;
   let currentTime = 0;
-  const accel = 0.12;
+  const accel = 0.08; // Deixando mais suave para evitar lag nos celulares
 
   // Função para atualizar o frame do vídeo
   function updateVideo() {
-    if (video.readyState >= 2) {
+    if (video.readyState >= 2 && !isNaN(targetTime)) {
       currentTime += (targetTime - currentTime) * accel;
       if (Math.abs(targetTime - currentTime) > 0.001) {
-        video.currentTime = currentTime;
+        try {
+          video.currentTime = currentTime;
+        } catch(e) {}
       }
     }
     requestAnimationFrame(updateVideo);
@@ -23,24 +34,36 @@ function initVideoScroll() {
 
   // Listener de Scroll
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const height = heroSection.offsetHeight;
-    if (scrollY <= height) {
-      const progress = scrollY / height;
-      targetTime = progress * video.duration;
+    const scrollY = window.scrollY || window.pageYOffset;
+    // Diferença correta. A seção rola enquanto a altura for maior que a janela.
+    const maxScroll = heroSection.offsetHeight - window.innerHeight;
+    
+    if (maxScroll > 0 && scrollY <= heroSection.offsetHeight) {
+      let progress = scrollY / maxScroll;
+      progress = Math.min(Math.max(progress, 0), 1); // Clamp entre 0 e 1
+      
+      // Guardar contra video.duration que começa como NaN
+      if (video.duration && !isNaN(video.duration)) {
+        targetTime = progress * video.duration;
+      }
     }
   }, { passive: true });
 
-  // "Destrava" o vídeo no mobile ao primeiro toque ou clique
+  // "Destrava" o vídeo no mobile ao primeiro toque/scroll (ajuda no iOS Safari)
   const unlockVideo = () => {
     video.play().then(() => {
       video.pause();
       window.removeEventListener('touchstart', unlockVideo);
-      window.removeEventListener('mousedown', unlockVideo);
-    }).catch(e => console.log("Aguardando interação..."));
+      window.removeEventListener('touchmove', unlockVideo);
+      window.removeEventListener('click', unlockVideo);
+    }).catch(e => {
+       // Silencioso se o usuário não interagir adequadamente
+    });
   };
-  window.addEventListener('touchstart', unlockVideo, { passive: true });
-  window.addEventListener('mousedown', unlockVideo, { passive: true });
+  
+  window.addEventListener('touchstart', unlockVideo, { passive: true, once: true });
+  window.addEventListener('touchmove', unlockVideo, { passive: true, once: true });
+  window.addEventListener('click', unlockVideo, { passive: true, once: true });
 
   requestAnimationFrame(updateVideo);
 }
