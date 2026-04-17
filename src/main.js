@@ -1,89 +1,72 @@
 import './style.css'
 
-// Função para inicializar as animações
-function initAnimations() {
-  const heroSection = document.querySelector('.hero');
+// Ativa o estado de animação apenas se o JS carregar
+document.body.classList.add('js-active');
+
+// Sincronia de Vídeo Simples (Versão PC Aprovada)
+function initVideoScroll() {
   const video = document.querySelector('#construction-video');
+  const hero = document.querySelector('.hero');
+  if (!video || !hero) return;
 
-  if (heroSection && video) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const totalVisibleScroll = heroSection.offsetHeight;
-      
-      if (scrollY <= totalVisibleScroll) {
-          const progress = Math.min(scrollY / totalVisibleScroll, 1);
-          if (video.readyState >= 2) {
-            video.currentTime = progress * video.duration;
-          }
-      }
-    }, { passive: true });
-  }
+  video.pause();
 
-  // Navbar transparente/blur ao scrollar
-  const nav = document.querySelector('nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
-        nav.classList.remove('bg-surface/60');
-      } else {
-        nav.classList.remove('bg-surface/90', 'shadow-2xl', 'backdrop-blur-xl');
-        nav.classList.add('bg-surface/60');
-      }
-    }, { passive: true });
-  }
-
-  // Animações de Interseção
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -10% 0px'
+  const updateTime = () => {
+    const scrollY = window.scrollY;
+    const progress = Math.max(0, Math.min(scrollY / hero.offsetHeight, 1));
+    
+    if (video.duration) {
+      video.currentTime = video.duration * progress;
+    }
   };
 
+  window.addEventListener('scroll', updateTime, { passive: true });
+  
+  // Mobile Unlock
+  const unlock = () => {
+    video.play().then(() => {
+      video.pause();
+      updateTime();
+    }).catch(() => {});
+    window.removeEventListener('touchstart', unlock);
+    window.removeEventListener('click', unlock);
+  };
+  window.addEventListener('touchstart', unlock);
+  window.addEventListener('click', unlock);
+}
+
+// Animações de Interseção
+function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        
-        // Aplica delay para elementos em grupo
-        const parent = el.parentElement;
-        if (parent && (parent.classList.contains('grid') || parent.classList.contains('space-y-8'))) {
-          const siblings = Array.from(parent.querySelectorAll('.fade-in-up, .reveal-mask'));
-          const index = siblings.indexOf(el);
-          if (index !== -1) {
-            el.style.transitionDelay = `${index * 0.1}s`;
-          }
-        }
-        
-        el.classList.add('visible');
-        observer.unobserve(el);
+        entry.target.classList.add('visible');
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in-up, .reveal-mask').forEach(el => {
     observer.observe(el);
   });
 }
 
-// Formulário de WhatsApp
+// Formulário
 function initForm() {
   const form = document.getElementById('whatsapp-form');
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      
       const name = document.getElementById('form-name').value;
       const location = document.getElementById('form-location').value;
       const service = document.getElementById('form-service').value;
       const details = document.getElementById('form-details').value;
-      
       const text = `Olá Luiz! Meu nome é ${name}, gostaria de uma consultoria sobre ${service} para uma obra em ${location}.\n\nDetalhes:\n${details}`;
-      
       window.open(`https://api.whatsapp.com/send?phone=5561991005256&text=${encodeURIComponent(text)}`, '_blank');
     });
   }
 }
 
-// Inicializa tudo
+// Inicializa
+initVideoScroll();
 initAnimations();
 initForm();
